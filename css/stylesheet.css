@@ -1,0 +1,35 @@
+.game-container {
+  display: grid;
+  width: 40%;
+  grid-template-columns: 25% 25% 25% 25%;
+  border-radius: 10px;
+  background-color: #9055a2;
+  margin: 0 auto;
+}
+
+.game-card {
+  background-color: pink;
+  font-size: 50px;
+  font-weight: bold;
+  height: 150px;
+  border-radius: 10px;
+  text-align: center;
+  margin: 20px;
+  cursor: pointer;
+}
+
+.game-rules {
+  height: 50px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin: 20px;
+}
+
+.symbol {
+  display: none;
+}
+.game-card-up {
+  background-color: #fff;
+  color: red;
+}
