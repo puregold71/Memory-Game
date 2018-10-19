@@ -1,20 +1,26 @@
 .game-container {
   display: grid;
-  width: 40%;
-  grid-template-columns: 25% 25% 25% 25%;
-  border-radius: 10px;
+  grid-column-gap: 10px;
+  grid-row-gap: 10px;
+  grid-template-columns: auto auto auto auto;
   background-color: #9055a2;
+  padding: 10px;
+  width: 90%;
   margin: 0 auto;
+  max-width: 800px;
+  min-width: 750px;
+
 }
 
 .game-card {
+  margin: 10px auto;
   background-color: pink;
   font-size: 50px;
   font-weight: bold;
-  height: 150px;
+  height: 140px;
+  width: 140px;
   border-radius: 10px;
   text-align: center;
-  margin: 20px;
   cursor: pointer;
 }
 
@@ -26,10 +32,17 @@
   margin: 20px;
 }
 
-.symbol {
-  display: none;
-}
+
 .game-card-up {
   background-color: #fff;
   color: red;
+}
+.game-card-winner {
+  background-color: #fff;
+  color: red;
+  border: 2px solid blue;
+}
+.game-card > span {
+  visibility: hidden;
+  /* display: none; */
 }
