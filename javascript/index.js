@@ -2,16 +2,36 @@
 let flippedTiles = 0;
 const cards = document.querySelectorAll(".game-card");
 const flippedCards = document.getElementsByClassName("game-card-up")
+const winningCards = document.getElementsByClassName("game-card-winner")
 const gameBoard = document.getElementsByClassName("game-container");
 // const cards = document.getElementsByClassName("game-card")
 const symbols = document.getElementsByClassName("flipped");
 const board = gameBoard[0];
 const deck = ["a", "a", "b", "b", "c", "c", "d", "d", "e", "e", "f", "f", "g", "g", "h", "h"];
+const colors = {
+  a : "red",
+  b : "blue",
+  c : "green",
+  d : "purple",
+  e : "orange",
+  f : "teal",
+  g : "black",
+  h : "pink"
+}
+
 
 
 function shuffle(){
   deck.sort(function() {return 0.5 - Math.random()});
+  // console.log(colors[0].color)
   for(let i=0; i<cards.length; i++){
+
+      for(let letter in colors){
+        if(letter === deck[i]){
+          symbols[i].style.color = colors[deck[i]]
+        }
+        console.log(colors["b"])
+      }
       symbols[i].innerHTML = deck[i];
     }
 }
@@ -32,9 +52,9 @@ function flip(e){
   if(flippedTiles === 2){
     isMatch(e)
     console.log(flippedCards.length)
-    // if(flippedCards.length === deck.length){
-    //   winner()
-    // }
+    if(winningCards.length === deck.length){
+      winner()
+    }
     }
   }
 
