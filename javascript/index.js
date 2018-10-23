@@ -3,10 +3,9 @@ let flippedTiles = 0;
 const cards = document.querySelectorAll(".game-card");
 const flippedCards = document.getElementsByClassName("game-card-up")
 const winningCards = document.getElementsByClassName("game-card-winner")
-const gameBoard = document.getElementsByClassName("game-container");
-// const cards = document.getElementsByClassName("game-card")
 const symbols = document.getElementsByClassName("flipped");
-const board = gameBoard[0];
+const board = document.getElementById("board");
+const gameOver = document.getElementById("game-over")
 const deck = ["a", "a", "b", "b", "c", "c", "d", "d", "e", "e", "f", "f", "g", "g", "h", "h"];
 const colors = {
   a : "red",
@@ -22,15 +21,14 @@ const colors = {
 
 
 function shuffle(){
+  //shuffle deck
   deck.sort(function() {return 0.5 - Math.random()});
-  // console.log(colors[0].color)
   for(let i=0; i<cards.length; i++){
-
+    //if the deck's letter is in colors, style the letter with that color
       for(let letter in colors){
         if(letter === deck[i]){
           symbols[i].style.color = colors[deck[i]]
         }
-        console.log(colors["b"])
       }
       symbols[i].innerHTML = deck[i];
     }
@@ -70,11 +68,13 @@ function isMatch(e){
         flippedOne.classList.add("game-card-winner");
         flippedTwo.classList.remove("game-card-up");
         flippedTwo.classList.add("game-card-winner");
+        //set flipped back to 0 so player can flip again
         flippedTiles = 0;
         console.log('a match');
       } else {
         console.log('try again');
         flippedTiles = 0;
+        //set delay on flipped card to 1s before it is flipped back down
         setTimeout( function() {
           flippedOne.classList.remove("game-card-up");
           flippedOne.firstChild.style.visibility = "hidden"
@@ -90,6 +90,18 @@ function isMatch(e){
 
 function winner () {
   console.log('winner')
+  for(let i=0; i<winningCards.length; i++){
+    winningCards[i].style.display = "none"
+    symbols[i].style.display = "none"
+  }
+  board.style.display = "flex"
+  board.style.width = "800px";
+  board.style.height = "675px";
+  gameOver.style.display = "inline";
+
+
+
+
 }
 board.addEventListener('click', flip);
 
