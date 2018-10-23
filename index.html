@@ -4,12 +4,14 @@
     <meta charset="utf-8">
     <meta content="width=device-width, initial-scale=1" name="viewport">
     <link href="css/stylesheet.css" rel="stylesheet">
-    <link href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.4.1/css/all.css" integrity="sha384-5sAR7xN1Nv6T6+dT2mhtzEpVJvfS3NScPQTrOxhwjIuvcA67KV2R5Jz6kr4abQsz" crossorigin="anonymous">
     <title>Memory Game</title>
   </head>
   <body>
     <div class="game-rules">
-      <div class="stars"></div><div class="counter"></div>
+      <div class="stars"><i class="fas fa-star" id="star-1"></i><i class="fas fa-star" id="star-2"></i><i class="fas fa-star" id="star-3"></i>
+      </div><h1>Memory</h1>
+      <div class="counter"><p>1234</p></div>
     </div>
     <div class="game-container" id="board">
       <div class="game-card" id="1"><span class="flipped"><span></div>
@@ -20,6 +22,7 @@
       <div class="game-card" id="6"><span class="flipped"><span></div>
       <div class="game-card" id="7"><span class="flipped"><span></div>
       <div class="game-card" id="8"><span class="flipped"><span></div>
+      <div id="game-over">Winner</div>
       <div class="game-card" id="9"><span class="flipped"><span></div>
       <div class="game-card" id="10"><span class="flipped"><span></div>
       <div class="game-card" id="11"><span class="flipped"><span></div>
