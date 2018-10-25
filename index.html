@@ -9,28 +9,33 @@
   </head>
   <body>
     <div class="game-rules">
-      <div class="stars"><i class="fas fa-star" id="star-1"></i><i class="fas fa-star" id="star-2"></i><i class="fas fa-star" id="star-3"></i>
-      </div><h1>Memory</h1>
-      <div class="counter"><p>1234</p></div>
+      <div class="stars"><i class="fas fa-star" id="star-1"></i><i class="fas fa-star" id="star-2"></i><i class="fas fa-star" id="star-3"></i><i class="fas fa-star" id="star-4"></i>
+      </div>
+      <h1>Memory</h1>
+      <div class="game-rules-right"><button onclick="setTimer()" id="start">Start Game</button><button onclick="reset()" id="stop">Reset Game</button><div id="timer">0:00</div>
+    </div>
     </div>
     <div class="game-container" id="board">
-      <div class="game-card" id="1"><span class="flipped"><span></div>
-      <div class="game-card" id="2"><span class="flipped"><span></div>
-      <div class="game-card" id="3"><span class="flipped"><span></div>
-      <div class="game-card" id="4"><span class="flipped"><span></div>
-      <div class="game-card" id="5"><span class="flipped"><span></div>
-      <div class="game-card" id="6"><span class="flipped"><span></div>
-      <div class="game-card" id="7"><span class="flipped"><span></div>
-      <div class="game-card" id="8"><span class="flipped"><span></div>
-      <div id="game-over">Winner</div>
-      <div class="game-card" id="9"><span class="flipped"><span></div>
-      <div class="game-card" id="10"><span class="flipped"><span></div>
-      <div class="game-card" id="11"><span class="flipped"><span></div>
-      <div class="game-card" id="12"><span class="flipped"><span></div>
-      <div class="game-card" id="13"><span class="flipped"><span></div>
-      <div class="game-card" id="14"><span class="flipped"><span></div>
-      <div class="game-card" id="15"><span class="flipped"><span></div>
-      <div class="game-card" id="16"><span class="flipped"><span></div>
+      <div class="game-card"><span class="flipped"><span></div>
+      <div class="game-card"><span class="flipped"><span></div>
+      <div class="game-card"><span class="flipped"><span></div>
+      <div class="game-card"><span class="flipped"><span></div>
+      <div class="game-card"><span class="flipped"><span></div>
+      <div class="game-card"><span class="flipped"><span></div>
+      <div class="game-card"><span class="flipped"><span></div>
+      <div class="game-card"><span class="flipped"><span></div>
+      <div id="play-again">
+        <div id="game-over">Winner</div>
+        <button id="button" onclick="reset()">Play Again</button>
+      </div>
+      <div class="game-card"><span class="flipped"><span></div>
+      <div class="game-card"><span class="flipped"><span></div>
+      <div class="game-card"><span class="flipped"><span></div>
+      <div class="game-card"><span class="flipped"><span></div>
+      <div class="game-card"><span class="flipped"><span></div>
+      <div class="game-card"><span class="flipped"><span></div>
+      <div class="game-card"><span class="flipped"><span></div>
+      <div class="game-card"><span class="flipped"><span></div>
   </div>
   <script src="javascript/index.js"></script>
   </body>

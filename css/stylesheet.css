@@ -4,7 +4,9 @@
   grid-column-gap: 10px;
   grid-row-gap: 10px;
   grid-template-columns: auto auto auto auto;
-  background-color: #9055a2;
+  background-image: linear-gradient(to top, rgba(144,85,162,1), rgba(144,85,162,0.7), rgba(144,85,162,1));
+  box-shadow: 20px 20px 50px 15px rgba(0, 0, 0, 0.5);
+  border-radius: 8px;
   padding: 10px;
   width: 90%;
   margin: 0 auto;
@@ -12,9 +14,18 @@
   min-width: 750px;
 }
 
+.win-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 800px;
+  height: 675px;
+}
+
 .game-card {
   margin: 10px auto;
-  background-color: pink;
+  background-image: repeating-linear-gradient(90deg, white, pink 7%,purple 10%);
+  box-shadow: 10px 10px 20px 10px rgba(0, 0, 0, 0.3);
   height: 140px;
   width: 140px;
   border-radius: 10px;
@@ -31,14 +42,26 @@
   align-items: center;
   margin: 0 auto;
 }
+.game-rules-right {
+  display: flex;
+  justify-content: flex-end;
+}
 
+#timer {
+  font-weight: bold;
+}
+#start, #stop {
+  margin-right: 25px;
+}
 
 .game-card-up {
+  background-image: none;
   background-color: #fff;
   color: red;
   transform: scale(1.2);
 }
 .game-card-winner {
+  background-image: none;
   background-color: #fff;
   color: red;
   border: 2px solid blue;
@@ -54,24 +77,35 @@
 }
 .game-card > span {
   visibility: hidden;
-  font-size: 110px;
+  font-size: 115px;
   font-weight: bold;
+  text-shadow: 2px 3px 2px #000;
 }
 .fa-star {
   color: #9055a2;
 }
 
 #game-over {
-  display: none;
   text-transform: uppercase;
   text-shadow: 2px 3px 2px #000;
   animation: grow 1s ease-out 3;
   animation-fill-mode: forwards;
-  align-self: center;
   margin: 0 auto;
-
 }
-
+#play-again {
+  display:none;
+  flex-direction: column;
+  height: 200px;
+  margin: 0 auto;
+}
+#button {
+  display: none;
+  height: 50px;
+  width: 200px;
+  border-radius: 7px;
+  font-size: 20px;
+  margin: 0 auto;
+}
 @keyframes grow {
   0% {font-size: 25px; color: #000;}
   25% {font-size: 50px; color: #9055a2;}
