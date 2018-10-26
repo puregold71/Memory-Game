@@ -1,14 +1,17 @@
 
 let flippedTiles = 0;
+const stars = document.getElementsByClassName("fa-star");
+const myRating = document.getElementsByClassName("stars");
 const cards = document.getElementsByClassName("game-card");
-const flippedCards = document.getElementsByClassName("game-card-up")
-const winningCards = document.getElementsByClassName("game-card-winner")
+const flippedCards = document.getElementsByClassName("game-card-up");
+const winningCards = document.getElementsByClassName("game-card-winner");
 const symbols = document.getElementsByClassName("flipped");
 const board = document.getElementById("board");
-const gameOver = document.getElementById("game-over")
-const playAgain = document.getElementById("play-again")
-const button = document.getElementById("button")
-const timer = document.getElementById("timer")
+const gameOver = document.getElementById("game-over");
+const playAgain = document.getElementById("play-again");
+const button = document.getElementById("button");
+const timer = document.getElementById("timer");
+const playerMoves = document.getElementById("moves");
 const deck = ["Հ", "Հ", "Ղ", "Ղ", "Ճ", "Ճ", "Վ", "Վ", "Ֆ", "Ֆ", "Մ", "Մ", "Պ", "Պ", "Չ", "Չ"];
 const colors = {
   Հ : "red",
@@ -19,29 +22,70 @@ const colors = {
   Մ : "teal",
   Պ : "black",
   Չ : "pink"
-}
+};
+const star4 = document.getElementById("star-4");
+const star3 = document.getElementById("star-3");
+const star2 = document.getElementById("star-2");
+const star1 = document.getElementById("star-1");
+const rating = document.getElementById("rating");
+const timeElapsed = document.getElementById("time-elapsed")
+let minutes = document.getElementById("min");
+let seconds0 = document.getElementById("sec0");
+let seconds1 = document.getElementById("sec1");
+let gameTimer = null;
+let noMatch = 0;
+let moves = 0;
 
 function reset() {
+  const startingTime = performance.now();
+  //remove winner board
   board.classList.remove("win-container")
+  //remove play again button
   playAgain.style.display = "none"
+  button.style.display = "none"
+  //remove winning card class for all cards / display orignal cards
   for(let i=0; i<cards.length; i++){
     cards[i].style.display = "block"
     cards[i].classList.remove("game-card-winner")
+    cards[i].classList.remove("game-card-up")
     symbols[i].style.display = "block"
     symbols[i].style.visibility = "hidden"
   }
-  //reset timer
-clearInterval(gameTimer)
+  //reset no matches card count
+  noMatch = 0;
+  //reset player moves
+  moves = 0;
+  playerMoves.innerHTML = moves;
+  //reset empty stars back to filled
+  for(let i=0; i<4; i++){
+  if(stars[i].classList.contains("far")){
+    stars[i].classList.remove("far")
+    stars[i].classList.add("fas")
+  }
+  }
 
- //shuffle cards
+  //reset timer
+  clearInterval(gameTimer);
+  gameTimer = null;
+  minutes.innerHTML = 0;
+  seconds0.innerHTML = 0;
+  seconds1.innerHTML = 0;
+
+  //reset flipped card count
+  flippedTiles = 0;
+
+  //shuffle cards
   shuffle()
+  // const endingTime = performance.now();
+  // console.log(endingTime - startingTime)
+
 }
 
 function shuffle(){
   //shuffle deck
   deck.sort(function() {return 0.5 - Math.random()});
   for(let i=0; i<cards.length; i++){
-    //if the deck's letter is in colors, style the letter with that color
+    //if the deck's symbol is in colors, style the symbol with that color
       for(let letter in colors){
         if(letter === deck[i]){
           symbols[i].style.color = colors[deck[i]]
@@ -56,6 +100,12 @@ function flip(e){
   if (flippedTiles < 2) {
     //if card clicked is down
     if (e.target.classList.contains("game-card")) {
+      //start timer on click
+      if(gameTimer === null){
+        setTimer()
+      }
+
+
       //flip card up
       e.target.classList.add("game-card-up");
 
@@ -66,6 +116,8 @@ function flip(e){
   }
   //when 2 cards have been flipped check if they match
   if(flippedTiles === 2){
+    moves += 1
+    playerMoves.innerHTML = moves;
     isMatch(e)
     if(winningCards.length === deck.length){
       winner()
@@ -73,9 +125,9 @@ function flip(e){
     }
   }
 
-let noMatch = 0;
+
 function isMatch(e){
-  //only 2 cards have game-card-up class
+  //check both cards have game-card-up class
     if(e.target.classList.contains("game-card-up")) {
       let flippedOne = flippedCards[0]
       let flippedTwo = flippedCards[1]
@@ -85,32 +137,35 @@ function isMatch(e){
         flippedOne.classList.add("game-card-winner");
         flippedTwo.classList.remove("game-card-up");
         flippedTwo.classList.add("game-card-winner");
+
         //set flipped back to 0 so player can flip again
         flippedTiles = 0;
+
         console.log('a match');
+
       } else {
         console.log('try again');
-        flippedTiles = 0;
+        //set delay to prevent card flipping too soon
+        setTimeout(function() {
+          flippedTiles = 0;
+        }, 1000)
+        //increase number of no matches
         noMatch += 1
-        console.log(noMatch)
+        //change classes every 3rd time there is a no match
         switch(noMatch){
           case 3:
-            const star4 = document.getElementById("star-4");
             star4.classList.remove("fas")
             star4.classList.add("far")
             break;
           case 6:
-            const star3 = document.getElementById("star-3");
             star3.classList.remove("fas")
             star3.classList.add("far")
             break;
           case 9:
-            const star2 = document.getElementById("star-2");
             star2.classList.remove("fas")
             star2.classList.add("far")
             break;
           case 12:
-            const star1 = document.getElementById("star-1");
             star1.classList.remove("fas")
             star1.classList.add("far")
             break;
@@ -138,22 +193,49 @@ function winner () {
   }
   //stop timer
   clearInterval(gameTimer)
-  //add winner class to boarc
+  //add winner class to board
   board.classList.add("win-container");
   //change display to show winner animation
   playAgain.style.display = "flex";
-  //wait 3 seconds before showing button
+  //show stars rating
+  rating.style.display = "block";
+  rating.innerHTML = myRating[0].innerHTML;
+  //show players time
+  timeElapsed.style.display = "block";
+  timeElapsed.innerHTML = `You won in ${minutes.innerHTML} min ${seconds0.innerHTML}${seconds1.innerHTML} seconds in ${playerMoves.innerHTML} moves!`
+
+  //wait 3 seconds before showing play again button
   setTimeout(function() {
     button.style.display = "block"
   }, 3000)
 
 }
 
-let gameTimer = null;
+
+
 function setTimer() {
    gameTimer = setInterval(function () {
-    let time = parseInt(timer.innerHTML)
-    timer.innerHTML = time + 1
+    let sec0 = parseInt(seconds0.innerHTML)
+    let sec1 = parseInt(seconds1.innerHTML)
+    let min = parseInt(minutes.innerHTML)
+    sec1++
+     if(sec1 > 9){
+       sec0 += 1
+       sec1 = 0
+     }
+     if(sec0 > 5){
+       min =+ 1
+       sec0 = 0
+       sec1 = 0
+     }
+     //timer stops at 15 min and displays TIMED OUT msg
+     if(min === 15){
+       clearInterval(gameTimer)
+       timer.innerHTML = "TIMED OUT"
+     }
+    seconds0.innerHTML = sec0
+    seconds1.innerHTML = sec1
+    minutes.innerHTML = min
 
   }, 1000)
 }
