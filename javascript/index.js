@@ -151,10 +151,6 @@ function isMatch(e) {
                     star2.classList.remove("fas")
                     star2.classList.add("far")
                     break;
-                case 12:
-                    star1.classList.remove("fas")
-                    star1.classList.add("far")
-                    break;
             }
             //set delay on flipped card to 1s before it is flipped back down
             setTimeout(function() {
