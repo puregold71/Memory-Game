@@ -1,6 +1,5 @@
 # Memory-Game
 Classic game of memory
-# Project Title
 
 Classic game of memory in which a single user chooses two face down cards. The cards are flipped up and
 if the cards are a match, the cards remain flipped up, else they are flipped back down and the user tries again.
